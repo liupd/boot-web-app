@@ -1,0 +1,78 @@
+# ----------------------------------------------------------------------------------
+endpoints:
+  shutdown:
+    enabled: false
+# ----------------------------------------------------------------------------------
+info:
+  app-name: boot-web
+  version: 1.0.0
+  authors:
+    - 刘佩东
+# ----------------------------------------------------------------------------------
+banner:
+  location: classpath:/META-INF/banner.txt
+# ----------------------------------------------------------------------------------
+spring:
+  freemarker:
+    allow-request-override: false
+    cache: false
+    check-template-location: true
+    charset: UTF-8
+    content-type: text/html
+    template-loader-path: classpath:/templates/
+    prefix:
+    suffix: .ftl
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/test
+      username: root
+      password: 1234
+      initial-size: 2
+      minIdle: 1
+      max-active: 20
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      test-on-return: false
+      test-on-borrow: false
+      test-while-idle: true
+      validation-query: SELECT 'X'
+      min-evictable-idle-time-millis: 300000
+      time-between-eviction-runs-millis: 3000
+      stat-filter:
+        log-slow-sql: true
+        slow-sql-millis: 5000
+        slf4j-log-filter:
+        result-set-log-enabled: false
+  mybatis:
+    config-location: classpath:/mybatis-mapper/mybatis.xml
+    fail-fast: true
+  aop:
+    service-logging:
+      enabled: true
+  task:
+    heartbeat:
+      enabled: true
+  jms:
+    broker-url: vm://localhost:61616?broker.persistent=false
+logging:
+  level:
+    org.springframework: WARN
+    org.hibernate.validator: WARN
+    org.apache.ibatis: WARN
+    org.mybatis: WARN
+    org.apache.activemq: WARN
+    freemarker: WARN
+    com.github.yingzhuo: DEBUG
+
+---
+spring:
+  profiles: dev
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/test
+      username: root
+      password: 1234
+

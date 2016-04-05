@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wa.net.dao.UserDao">
+    <select id="selectListForPage" resultType="com.wa.net.domain.User" parameterType="com.wa.net.domain.User">
+		SELECT ID,NAME,code,email,password,
+		DATE_FORMAT(createTime,'%Y-%m-%d %H:%i:%S')as createTime
+		FROM user WHERE name LIKE '%${name}%'
+	</select>
+
+
+    <select id="selectListRow" resultType="com.wa.net.domain.User" parameterType="java.lang.String">
+		SELECT ID,NAME,code,email,password,
+		       DATE_FORMAT(createTime,'%Y-%m-%d %H:%i:%S')as createTime
+		FROM user WHERE name LIKE concat('%',#{name},'%')
+	</select>
+
+</mapper>
